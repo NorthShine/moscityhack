@@ -9,3 +9,6 @@ parser/dist
 chrome-extension/.env
 chrome-extension/node_modules
 chrome-extension/dist
+
+trustbadge/node_modules
+trustbadge/dist
