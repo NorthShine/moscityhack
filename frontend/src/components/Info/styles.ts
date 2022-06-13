@@ -49,15 +49,15 @@ const styles: Styles = {
     width: '60%',
     padding: '0 !important',
     '@media (max-width: 500px)': {
-      width: '100%',
-      marginBottom: '20px !important'
+      width: '100%'
     }
   },
   resultContainer: {
     padding: '40px 0 !important',
     width: '30%',
     '@media (max-width: 500px)': {
-      width: '100%'
+      width: '100%',
+      marginBottom: '20px !important'
     }
   },
   result: {

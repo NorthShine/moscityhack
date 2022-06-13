@@ -87,6 +87,7 @@ export const WhitelistItem: React.FC<WhitelistItemProps> = (props) => {
       )
         : (
           <ListItem
+            css={css.listItem}
             disableGutters
             secondaryAction={(
               <>
@@ -108,7 +109,7 @@ export const WhitelistItem: React.FC<WhitelistItemProps> = (props) => {
               </>
             )}
           >
-            <ListItemText primary={url} />
+            <ListItemText css={css.text} primary={url} />
           </ListItem>
         )}
       <Divider component="li" />

@@ -124,6 +124,7 @@ export const Home: React.FC = () => {
                 onChange={handleInputChange}
                 label="Введите заголовок"
                 fullWidth
+                required
               />
               <TextField
                 css={css.input}

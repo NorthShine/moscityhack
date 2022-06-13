@@ -59,9 +59,11 @@ export const alertReducer = createReducer(initialState, (builder) => {
   }));
 
   builder.addCase(getWhitelistItemsAction.rejected, setApiAlert.bind({
+    message: 'Ошибка при получении whitelist',
     severity: 'error'
   }));
   builder.addCase(addToWhitelistAction.rejected, setApiAlert.bind({
+    message: 'Ошибка добавления в whitelist',
     severity: 'error'
   }));
 
@@ -73,13 +75,16 @@ export const alertReducer = createReducer(initialState, (builder) => {
     })
   );
   builder.addCase(deleteWhitelistItemAction.rejected, setApiAlert.bind({
+    message: 'Ошибка удаления из whitelist',
     severity: 'error'
   }));
 
   builder.addCase(checkUrlAction.rejected, setApiAlert.bind({
+    message: 'Ошибка проверки URL',
     severity: 'error'
   }));
   builder.addCase(checkTextAction.rejected, setApiAlert.bind({
+    message: 'Ошибка проверки текста',
     severity: 'error'
   }));
 });

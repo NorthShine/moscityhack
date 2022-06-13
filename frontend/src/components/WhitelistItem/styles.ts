@@ -6,6 +6,14 @@ const styles: Styles = {
     display: 'flex',
     gap: 10,
     padding: '10px 0'
+  },
+  text: {
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden'
+  },
+  listItem: {
+    paddingRight: '120px !important'
   }
 };
 
