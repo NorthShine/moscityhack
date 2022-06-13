@@ -1,0 +1,67 @@
+name: Deploy Client
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v1
+
+            - name: Copy repository contents via scp
+              uses: appleboy/scp-action@master
+              env:
+                  HOST: ${{ secrets.HOST }}
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PORT: ${{ secrets.PORT }}
+                  KEY: ${{ secrets.SSH_KEY }}
+              with:
+                  source: '.'
+                  target: 'app'
+            - name: Installing dependencies
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.HOST }}
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PORT: ${{ secrets.PORT }}
+                  KEY: ${{ secrets.SSH_KEY }}
+                  script: |
+                      cd app
+                      npm i
+            - name: Creating .env file
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.HOST }}
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PORT: ${{ secrets.PORT }}
+                  KEY: ${{ secrets.SSH_KEY }}
+                  envs: VITE_API_URL
+                  script: |
+                      cd app
+                      touch .env
+                      echo VITE_API_URL=${{ secrets.VITE_API_URL }} >> .env
+                      cat .env
+            - name: Building the app
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.HOST }}
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PORT: ${{ secrets.PORT }}
+                  KEY: ${{ secrets.SSH_KEY }}
+                  script: |
+                      cd app
+                      npm run build
+            - name: Running the app
+              uses: appleboy/ssh-action@master
+              with:
+                    host: ${{ secrets.HOST }}
+                    USERNAME: ${{ secrets.USERNAME }}
+                    PORT: ${{ secrets.PORT }}
+                    KEY: ${{ secrets.SSH_KEY }}
+                    script: |
+                        cd app
+                        pm2 restart app
