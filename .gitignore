@@ -4,3 +4,8 @@ frontend/.env
 
 parser/.env
 parser/node_modules
+parser/dist
+
+chrome-extension/.env
+chrome-extension/node_modules
+chrome-extension/dist
