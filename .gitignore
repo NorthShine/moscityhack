@@ -12,3 +12,9 @@ chrome-extension/dist
 
 trustbadge/node_modules
 trustbadge/dist
+
+backend/venv/
+backend/.idea/
+backend/__pycache__/
+backend/config.yml
+backend/project.db

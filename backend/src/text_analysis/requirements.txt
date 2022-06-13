@@ -1,0 +1,8 @@
+torch
+transformers
+sentencepiece
+gensim
+nltk
+pymystem3
+sklearn
+dostoevsky
