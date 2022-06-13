@@ -1,0 +1,68 @@
+name: Deploy Server
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v1
+
+            - name: Copy repository contents via scp
+              uses: appleboy/scp-action@master
+              env:
+                  HOST: ${{ secrets.HOST }}
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PORT: ${{ secrets.PORT }}
+                  KEY: ${{ secrets.SSH_KEY }}
+              with:
+                  source: '.'
+                  target: 'parser'
+            - name: Installing dependencies
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.HOST }}
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PORT: ${{ secrets.PORT }}
+                  KEY: ${{ secrets.SSH_KEY }}
+                  script: |
+                      cd parser
+                      npm i
+            - name: Creating .env file
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.HOST }}
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PORT: ${{ secrets.PORT }}
+                  KEY: ${{ secrets.SSH_KEY }}
+                  envs: REQUEST_ORIGIN
+                  script: |
+                      cd parser
+                      touch .env
+                      echo REQUEST_ORIGIN=${{ secrets.REQUEST_ORIGIN }} >> .env
+                      cat .env
+            - name: Building the Server app
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.HOST }}
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PORT: ${{ secrets.PORT }}
+                  KEY: ${{ secrets.SSH_KEY }}
+                  script: |
+                      cd parser
+                      npm run build
+            - name: Running the server
+              uses: appleboy/ssh-action@master
+              with:
+                    host: ${{ secrets.HOST }}
+                    USERNAME: ${{ secrets.USERNAME }}
+                    PORT: ${{ secrets.PORT }}
+                    KEY: ${{ secrets.SSH_KEY }}
+                    script: |
+                        cd parser/dist
+                        pm2 restart parser
+                      
