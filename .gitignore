@@ -18,3 +18,8 @@ backend/.idea/
 backend/__pycache__/
 backend/config.yml
 backend/project.db
+
+telegram-bot/venv/
+telegram-bot/.idea/
+telegram-bot/__pycache__/
+telegram-bot/config.yml

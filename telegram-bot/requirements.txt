@@ -1,0 +1,4 @@
+aiogram
+pyyaml
+validators
+httpx
