@@ -1,5 +1,23 @@
 # Fact Checker - Web App
 
+## Stack
+
+- Typescript
+- React
+- Redux-toolkit
+- Material UI
+- Emotion CSS
+- Axios
+- Vite
+
+
+## Features
+
+* Check URL/text for trustworthiness
+* URL check statistics
+* Whitelist/Admin panel
+
+
 ## Installation
 
 To run the server, you will need to have Node JS installed.
