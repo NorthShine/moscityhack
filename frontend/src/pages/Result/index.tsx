@@ -11,11 +11,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useAppSelector } from 'hooks/useAppSelector';
-import { useNavigate } from 'react-router-dom';
 import { Info } from 'components/Info';
 import { Articles } from 'components/Articles';
 import { useQuery } from 'hooks/useQuery';
 import { useAppDispatch } from 'hooks/useAppDispatch';
+import { useNavigate } from 'react-router-dom';
 import styles from './styles';
 import { checkUrlAction } from '../../store/reducers/news/actionCreators';
 
@@ -38,10 +38,12 @@ export const Result: React.FC = () => {
 
   useEffect(() => {
     const url = query.get('url');
-    if (!data && url) {
-      dispatch(checkUrlAction({ url }));
-    } else {
-      navigate('/');
+    if (!data) {
+      if (url) {
+        dispatch(checkUrlAction({ url }));
+      } else {
+        navigate('/');
+      }
     }
   }, []);
 
