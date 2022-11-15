@@ -13,6 +13,8 @@ services:
     links:
       - "frontend" 
       - "parser"
+    volumes:
+       - trustbadge:/trustbadge
 
   parser:
     build:
@@ -36,3 +38,12 @@ services:
       - ./frontend:/app/frontend
     ports:
       - "3000:3000"
+
+  trustbadge:
+    build:
+      dockerfile: Dockerfile
+      context: "./trustbadge-script"
+    volumes:
+      - trustbadge:/app/dist
+volumes:
+  trustbadge:
