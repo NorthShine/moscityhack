@@ -1,8 +1,7 @@
-FROM node:14.18.2
-FROM mcr.microsoft.com/playwright:v1.27.1-focal
+FROM node:14.18.2 as build
 WORKDIR /app
 COPY package.json .
 RUN npm i
 COPY . .
-EXPOSE 3001
+EXPOSE 3000
 CMD ["npm", "run", "dev"]
