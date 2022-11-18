@@ -39,6 +39,21 @@ services:
     ports:
       - "3000:3000"
 
+  backend:
+    build:
+      dockerfile: Dockerfile
+      context: ./backend
+    command: python src/main.py
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+
+  searx:
+    image: searx/searx
+    ports:
+      - "81:81"
+
   trustbadge:
     build:
       dockerfile: Dockerfile
