@@ -5,4 +5,5 @@ gensim
 nltk
 pymystem3
 sklearn
+scikit-learn
 dostoevsky

@@ -23,8 +23,6 @@ services:
     volumes:
       - /app/node_modules
       - ./parser:/app/parser
-    ports:
-      - "3001:3001"
 
   frontend:
     stdin_open: true
@@ -44,8 +42,6 @@ services:
       dockerfile: Dockerfile
       context: ./backend
     command: python src/main.py
-    ports:
-      - "5000:5000"
     volumes:
       - ./backend:/app
 
@@ -60,5 +56,6 @@ services:
       context: "./trustbadge-script"
     volumes:
       - trustbadge:/app/dist
+      
 volumes:
   trustbadge:
